@@ -1,0 +1,810 @@
+:root {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --accent: #6e56cf;
+    --accent-hover: #7c66d9;
+    --text-primary: #e2e2e2;
+    --text-secondary: #aaaaaa;
+    --text-accent: #b4a0ff;
+    --error: #ff5252;
+    --success: #4ade80;
+    --border: #333333;
+    --card-bg: #1e1e1e;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Center the body content */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    overflow-x: hidden;
+    /* Prevent horizontal scrolling */
+    margin: 0;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* Center the container */
+.container {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* Prevent child elements from overflowing */
+    text-align: center;
+    /* Ensure content is centered */
+}
+
+/* Ensure the main content is centered */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0;
+    width: 100%;
+    /* Ensure it doesn't exceed the container width */
+}
+
+.header {
+    padding: 1.5rem 0;
+    position: relative;
+    z-index: 2;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.logo-icon {
+    margin-right: 0.8rem;
+    font-size: 1.8rem;
+    color: var(--accent);
+}
+
+.blob {
+    position: absolute;
+    top: -150px;
+    right: -150px;
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(45deg, var(--accent), rgba(110, 86, 207, 0.3));
+    filter: blur(150px);
+    border-radius: 50%;
+    z-index: -1;
+    animation: blob-float 15s ease-in-out infinite alternate;
+    opacity: 0.5;
+}
+
+.blob-2 {
+    position: absolute;
+    bottom: -200px;
+    left: -100px;
+    width: 450px;
+    height: 450px;
+    background: linear-gradient(-45deg, var(--accent), rgba(110, 86, 207, 0.2));
+    filter: blur(180px);
+    border-radius: 50%;
+    z-index: -1;
+    animation: blob-float 20s ease-in-out infinite alternate-reverse;
+    opacity: 0.3;
+}
+
+@keyframes blob-float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(30px, -30px) rotate(180deg);
+    }
+
+    100% {
+        transform: translate(-20px, 40px) rotate(360deg);
+    }
+}
+
+.calculator-card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 2rem;
+    width: 100%;
+    /* Ensure it doesn't exceed the container width */
+    max-width: 960px;
+    /* Prevent it from growing too large */
+    animation: fadeIn 0.8s ease-out;
+}
+
+.glow-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-image: linear-gradient(90deg, transparent, var(--accent), transparent);
+    animation: glow 2s linear infinite;
+}
+
+@keyframes glow {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.card-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    position: relative;
+    display: inline-block;
+}
+
+.card-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: var(--accent);
+    border-radius: 5px;
+}
+
+.upload-container {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upload-area {
+    width: 100%;
+    border: 2px dashed rgba(110, 86, 207, 0.4);
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+    margin-bottom: 2rem;
+    position: relative;
+    background-color: rgba(110, 86, 207, 0.05);
+    overflow: hidden;
+}
+
+.upload-area:hover {
+    border-color: var(--accent);
+    background-color: rgba(110, 86, 207, 0.1);
+    transform: translateY(-2px);
+}
+
+.upload-area.active {
+    border-color: var(--success);
+    background-color: rgba(74, 222, 128, 0.05);
+}
+
+.upload-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(110, 86, 207, 0.2) 0%, transparent 70%);
+    transform: translateX(-50%);
+    transition: var(--transition);
+}
+
+.upload-area:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.upload-icon {
+    font-size: 3.5rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    transition: var(--transition);
+}
+
+.upload-area:hover .upload-icon {
+    transform: scale(1.1);
+    color: var(--text-accent);
+}
+
+.upload-text {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.upload-hint {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+#file-input {
+    display: none;
+}
+
+.file-details {
+    display: none;
+    background-color: rgba(110, 86, 207, 0.1);
+    border-radius: 10px;
+    padding: 1.2rem;
+    margin: 1.5rem 0;
+    text-align: left;
+    width: 100%;
+    animation: fadeIn 0.5s ease;
+    border: 1px solid rgba(110, 86, 207, 0.2);
+}
+
+.file-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.file-icon {
+    color: var(--accent);
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.file-size {
+    font-size: 0.9rem;
+    color: var (--text-secondary);
+}
+
+.file-status {
+    display: flex;
+    align-items: center;
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+    color: var(--success);
+}
+
+.file-status i {
+    margin-right: 6px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.btn {
+    padding: 0.9rem 1.8rem;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: var(--transition);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn i {
+    margin-right: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    color: white;
+    flex: 1;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(110, 86, 207, 0.3);
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+    transition: 0.7s;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--text-accent);
+    transform: translateY(-2px);
+    background-color: rgba(110, 86, 207, 0.05);
+}
+
+.remove-file {
+    background-color: transparent;
+    border: none;
+    color: var(--error);
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    margin-top: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 6px;
+    transition: var(--transition);
+}
+
+.remove-file:hover {
+    background-color: rgba(255, 82, 82, 0.1);
+}
+
+.remove-file i {
+    margin-right: 6px;
+}
+
+/* Loading Animation */
+.loading-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(30, 30, 30, 0.9);
+    border-radius: 16px;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    animation: fadeIn 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 3px solid transparent;
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loading-spinner::before,
+.loading-spinner::after {
+    content: '';
+    position: absolute;
+    border: 3px solid transparent;
+    border-radius: 50%;
+}
+
+.loading-spinner::before {
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-top-color: var(--accent);
+    animation: spin 2s linear infinite;
+}
+
+.loading-spinner::after {
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-top-color: var(--accent);
+    animation: spin 1.5s linear infinite;
+}
+
+.loading-text {
+    position: absolute;
+    top: calc(50% + 40px);
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+/* Add this to your existing CSS */
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        /* Ensure it fits within the viewport */
+        padding: 15px;
+    }
+
+    .main-content {
+        padding: 2rem 0;
+    }
+
+    .calculator-card {
+        width: 100%;
+        padding: 1.5rem;
+        margin: 0 auto;
+        text-align: center;
+        /* Center content inside the card */
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .upload-container {
+        margin-top: 1.5rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .calculator-card {
+        padding: 1rem;
+        border-radius: 12px;
+        text-align: center;
+        /* Ensure content is centered */
+    }
+
+    .card-title {
+        font-size: 1.3rem;
+    }
+
+    .upload-text {
+        font-size: 1rem;
+    }
+
+    .upload-hint {
+        font-size: 0.85rem;
+    }
+}
+
+/* Ensure the form takes full width */
+#cgpa-form {
+    width: 100%;
+}
+
+/* Center the upload area content */
+.upload-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Make sure the file input area is properly clickable */
+#upload-area {
+    position: relative;
+}
+
+#file-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+}
+
+/* Add this if you want better table row highlighting */
+.student-row {
+    transition: background-color 0.2s ease;
+}
+
+.student-row:hover {
+    background-color: rgba(110, 86, 207, 0.05);
+}
+
+/* For mobile touch feedback */
+.student-row:active {
+    background-color: rgba(110, 86, 207, 0.1);
+}
+
+/* Style the CGPA values based on their score */
+.cgpa.excellent {
+    color: #10b981;
+    font-weight: bold;
+}
+
+.cgpa.good {
+    color: #3b82f6;
+    font-weight: bold;
+}
+
+.cgpa.average {
+    color: #f59e0b;
+    font-weight: bold;
+}
+
+.cgpa.pass {
+    color: #6366f1;
+}
+
+.cgpa.fail {
+    color: #ef4444;
+    font-weight: bold;
+}
+
+.highlight {
+    font-weight: bold;
+    color: var(--accent);
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Add these styles to your index.css file */
+
+/* Results Table Styling */
+.results-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #6c63ff;
+}
+
+.results-summary {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #555;
+}
+
+.students-table,
+.detailed-table,
+.courses-table {
+    overflow-x: auto;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background-color: rgba(108, 99, 255, 0.1);
+    color: #333;
+    font-weight: 500;
+    position: sticky;
+    top: 0;
+}
+
+tr:hover {
+    background-color: rgba(108, 99, 255, 0.05);
+}
+
+.student-row {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.student-row:hover {
+    background-color: rgba(108, 99, 255, 0.1);
+}
+
+.cgpa {
+    font-weight: bold;
+}
+
+.cgpa.excellent {
+    color: #28a745;
+    /* Green for A */
+}
+
+.cgpa.good {
+    color: #17a2b8;
+    /* Blue for B */
+}
+
+.cgpa.average {
+    color: #ffc107;
+    /* Yellow for C */
+}
+
+.cgpa.pass {
+    color: #fd7e14;
+    /* Orange for D */
+}
+
+.cgpa.fail {
+    color: #dc3545;
+    /* Red for F */
+}
+
+.download-results {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.back-btn {
+    margin-bottom: 20px;
+    align-self: flex-start;
+}
+
+.student-info {
+    background-color: rgba(108, 99, 255, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.highlight {
+    color: #6c63ff;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.calculation {
+    background-color: rgba(108, 99, 255, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.calculation p {
+    margin: 5px 0;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.summary-row {
+    background-color: rgba(108, 99, 255, 0.05);
+}
+
+.cgpa-row {
+    background-color: rgba(108, 99, 255, 0.1);
+    font-weight: bold;
+}
+
+.spacer td {
+    height: 20px;
+    border-bottom: none;
+}
+
+/* Error Message Styling */
+.error-message {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.error-message i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+#upload-area,
+#file-details,
+#results-container {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#upload-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#results-container {
+    overflow-x: auto;
+    /* Prevent horizontal overflow */
+}
+
+.students-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.students-table th,
+.students-table td {
+    padding: 8px;
+    text-align: left;
+    word-wrap: break-word;
+    /* Prevent long text from breaking the layout */
+}
+
+.drag-over {
+    border: 2px dashed var(--accent);
+    background-color: rgba(110, 86, 207, 0.1);
+}
