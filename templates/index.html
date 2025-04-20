@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart BULKCGPA - CGPA Calculator</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="{% static 'index.js' %}"></script>
+</head>
+
+<body>
+    <div class="blob"></div>
+    <div class="blob-2"></div>
+
+    <header class="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                Smart BULKCGPA
+            </a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="calculator-card">
+                <div class="glow-effect"></div>
+                <h1 class="card-title">CGPA Calculator</h1>
+
+                <form id="cgpa-form" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="upload-container">
+                        <div class="upload-area" id="upload-area">
+                            <i class="fas fa-file-upload upload-icon"></i>
+                            <h3 class="upload-text">Upload your grades CSV file</h3>
+                            <p class="upload-hint">Drag & drop or click to browse</p>
+                            <input type="file" name="cgpa_file" id="file-input" accept=".csv">
+                        </div>
+
+                        <div class="file-details" id="file-details">
+                            <div class="file-name">
+                                <i class="fas fa-file-csv file-icon"></i>
+                                <span id="file-name-text">grades.csv</span>
+                            </div>
+                            <div class="file-size" id="file-size-text">125 KB</div>
+                            <div class="file-status">
+                                <i class="fas fa-check-circle"></i> Ready to calculate
+                            </div>
+                            <button type="button" class="remove-file" id="remove-file">
+                                <i class="fas fa-trash-alt"></i> Remove file
+                            </button>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button type="button" class="btn btn-primary" id="calculate-btn">
+                                <i class="fas fa-calculator"></i> Calculate CGPA
+                            </button>
+                            <a href="{% url 'index' %}" class="btn btn-outline" id="sample-btn">
+                                <i class="fas fa-download"></i> Go Back
+                            </a>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="loading-container" id="loading-container">
+                    <div class="loading-spinner"></div>
+                    <div class="loading-text">Calculating CGPA...</div>
+                </div>
+
+                <div class="results-container" id="results-container">
+                    <!-- Results will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>
